@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+</head>
+<body>
+    <h1>Upload Images</h1>
+    <input type="file" id="imageInput" multiple>
+    <button onclick="uploadImages()">Upload</button>
+
+    <script>
+        function uploadImages() {
+            const imageInput = document.getElementById('imageInput');
+            const formData = new FormData();
+
+            for (const file of imageInput.files) {
+                formData.append('images', file);
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:80/pdf', true);
+
+            xhr.send(formData);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert('Images uploaded successfully.');
+                } else {
+                    alert('Error uploading images.');
+                }
+            };
+
+            xhr.onerror = function() {
+                alert('Error uploading images.');
+            };
+
+            
+        }
+    </script>
+</body>
+</html>
