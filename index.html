@@ -1,43 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Upload</title>
+    <meta charset="utf-8">
+    <meta name="description" content="A simple API to use the pdf creator.">
+    <meta name="author" content="Vinícius Pilan">
+    <meta name="for you" content="Have a nice day! :D">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            padding: 10px;
+            background-color: gray;
+            color: #fff;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload Images</h1>
-    <input type="file" id="imageInput" multiple>
-    <button onclick="uploadImages()">Upload</button>
+    <div class="container">
+        <h1>File Transfer</h1>
+        <form action="/uploadfiles/" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="uploadFiles">Upload Files</label>
+                <input name="files" type="file" multiple>
+                <input type="submit" value="Upload Files">
+            </div>
+        </form>
 
-    <script>
-        function uploadImages() {
-            const imageInput = document.getElementById('imageInput');
-            const formData = new FormData();
-
-            for (const file of imageInput.files) {
-                formData.append('images', file);
-            }
-
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://localhost:80/pdf', true);
-
-            xhr.send(formData);
-
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    alert('Images uploaded successfully.');
-                } else {
-                    alert('Error uploading images.');
-                }
-            };
-
-            xhr.onerror = function() {
-                alert('Error uploading images.');
-            };
-
-            
-        }
-    </script>
+        <form action="/downloadfile/" method="get">
+            <div class="form-group">
+                <label for="downloadFile">Download a File</label>
+            </div>
+            <input type="submit" value="Download File">
+        </form>
+        <div class="footer">
+            &copy; 2023 Vinicius Pilan - DevOps. All rights reserved.
+        </div>
+    </div>
 </body>
 </html>

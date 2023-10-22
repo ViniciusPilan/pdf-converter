@@ -1,9 +1,12 @@
 FROM python:3.11-slim
 
-ADD . /home/api/
-WORKDIR /home/api
-ENV PYTHONUNBUFFERED=true
-EXPOSE 80
-RUN pip3 install -r requirements.txt
+COPY . /home/
+WORKDIR /home
 
-ENTRYPOINT [ "python3", "api.py" ]
+RUN mkdir /home/tmp \
+    && pip3 install -r requirements.txt
+
+ENV TMP_FILE_PATH="/home/tmp/pdf_file.pdf"
+EXPOSE 80
+
+CMD [ "uvicorn", "api:app", "--reload", "--host", "0.0.0.0", "--port", "80" ]
