@@ -1,2 +1,1 @@
-*.crt
-*.key
+secret.yml
