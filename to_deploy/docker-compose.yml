@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  python-app:
+    image: pdf-converter:1
+    container_name: pdf-converter
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'  # Limit the container to use at most 50% of one CPU core
+          memory: '256M'  # Limit the container to use at most 512 megabytes of memory
+  nginx:
+    image: nginx:latest
+    container_name: my-nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - python-app
