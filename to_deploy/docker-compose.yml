@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   python-app:
-    image: pdf-converter:1
+    image: vinipilan/pdf-converter:1
     container_name: pdf-converter
     deploy:
       resources:
