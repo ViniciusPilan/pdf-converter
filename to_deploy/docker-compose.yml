@@ -10,7 +10,7 @@ services:
           memory: '128M'  # Limit the container to use at most 512 megabytes of memory
 
   ex-api:
-    image: vinipilan/ex_api:1.0.1
+    image: vinipilan/ex_api:1.1.0
     deploy:
       resources:
         limits:
