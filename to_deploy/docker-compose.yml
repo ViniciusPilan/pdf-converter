@@ -1,17 +1,24 @@
 version: '3.8'
 
 services:
-  python-app:
+  pdf-converter:
     image: vinipilan/pdf-converter:1
-    container_name: pdf-converter
     deploy:
       resources:
         limits:
-          cpus: '0.5'  # Limit the container to use at most 50% of one CPU core
-          memory: '256M'  # Limit the container to use at most 512 megabytes of memory
+          cpus: '0.3'  # Limit the container to use at most 50% of one CPU core
+          memory: '128M'  # Limit the container to use at most 512 megabytes of memory
+
+  ex-api:
+    image: vinipilan/ex_api:1.0.1
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'  # Limit the container to use at most 50% of one CPU core
+          memory: '64M'  # Limit the container to use at most 512 megabytes of memory
+
   nginx:
     image: nginx:latest
-    container_name: my-nginx-proxy
     ports:
       - "80:80"
       - "443:443"
@@ -19,5 +26,10 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./certifications:/etc/nginx/certifications
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'  # Limit the container to use at most 50% of one CPU core
+          memory: '256M'  # Limit the container to use at most 512 megabytes of memory
     depends_on:
-      - python-app
+      - pdf-converter
