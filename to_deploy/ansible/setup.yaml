@@ -29,6 +29,5 @@
     - name: Clone GitHub repository
       become: true
       git:
-        repo: 
-          var: git_repository
+        repo: https://github.com/ViniciusPilan/pdf-converter.git
         dest: /home/ubuntu/pdf-converter
