@@ -42,8 +42,8 @@
       become: true
       shell:
         cmd: |
-          aws s3 cp s3://tools.vinipilan.com/letsencrypt-files/live/tools.vinipilan.com/fullchain.pem /home/ubuntu/pdf-converter/to_deploy/certifications/pdf_converter.crt
-          aws s3 cp s3://tools.vinipilan.com/letsencrypt-files/live/tools.vinipilan.com/privkey.pem /home/ubuntu/pdf-converter/to_deploy/certifications/pdf_converter.key
+          aws s3 cp s3://dev.vinipilan.com/letsencrypt-files/live/dev.vinipilan.com/fullchain.pem /home/ubuntu/pdf-converter/to_deploy/certifications/pdf_converter.crt
+          aws s3 cp s3://dev.vinipilan.com/letsencrypt-files/live/dev.vinipilan.com/privkey.pem /home/ubuntu/pdf-converter/to_deploy/certifications/pdf_converter.key
       args:
         executable: /bin/bash
 
