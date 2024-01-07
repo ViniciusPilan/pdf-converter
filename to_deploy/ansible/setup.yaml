@@ -51,7 +51,7 @@
       become: true
       shell:
         cmd: |
-          cd /home/vini/documents/projects/pdf-converter/to_deploy
+          cd /home/ubuntu/pdf-converter/to_deploy
           docker compose up -d
       args:
         executable: /bin/bash
