@@ -20,6 +20,12 @@
       args:
         executable: /bin/bash
 
+    - name: Install awscli
+      become: true
+      apt:
+        name: awscli
+        state: present
+
     - name: Install git
       become: true
       apt:
@@ -31,3 +37,22 @@
       git:
         repo: https://github.com/ViniciusPilan/pdf-converter.git
         dest: /home/ubuntu/pdf-converter
+ 
+    - name: Pull SSL cert and key
+      become: true
+      shell:
+        cmd: |
+          aws s3 cp s3://tools.vinipilan.com/letsencrypt-files/live/tools.vinipilan.com/fullchain.pem /home/vini/documents/projects/pdf-converter/to_deploy/certifications/pdf_converter.crt
+          aws s3 cp s3://tools.vinipilan.com/letsencrypt-files/live/tools.vinipilan.com/privkey.pem /home/vini/documents/projects/pdf-converter/to_deploy/certifications/pdf_converter.key
+      args:
+        executable: /bin/bash
+
+    - name: Start server
+      become: true
+      shell:
+        cmd: |
+          cd /home/vini/documents/projects/pdf-converter/to_deploy
+          docker compose up -d
+      args:
+        executable: /bin/bash
+        
