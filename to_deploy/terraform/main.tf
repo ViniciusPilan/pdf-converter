@@ -26,13 +26,22 @@ resource "aws_security_group" "main_security_group" {
   description = "Allow TLS inbound traffic and SSH"
 
   ingress {
-    description      = "TLS from VPC"
+    description      = "Aloow https"
     from_port        = 443
     to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+
+#   ingress {
+#     description      = "Allow http"
+#     from_port        = 80
+#     to_port          = 80
+#     protocol         = "tcp"
+#     cidr_blocks      = ["0.0.0.0/0"]
+#     ipv6_cidr_blocks = ["::/0"]
+#   }
 
   ingress {
     description      = "SSH"
