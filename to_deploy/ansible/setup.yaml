@@ -1,0 +1,34 @@
+---
+- name: Configure EC2 instance for GitHub repo and Docker
+  hosts: main_server
+  become: true
+  vars_files:
+  - variables.yaml
+
+  tasks:
+    - name: Update apt cache
+      become: true
+      apt:
+        update_cache: yes
+  
+    - name: Install Docker
+      become: true
+      shell:
+        cmd: |
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sh ./get-docker.sh
+      args:
+        executable: /bin/bash
+
+    - name: Install git
+      become: true
+      apt:
+        name: git
+        state: present
+
+    - name: Clone GitHub repository
+      become: true
+      git:
+        repo: 
+          var: git_repository
+        dest: /home/ubuntu/pdf-converter
