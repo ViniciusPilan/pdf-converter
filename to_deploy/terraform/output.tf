@@ -10,6 +10,10 @@ output "instance_private_ipv4" {
   value = aws_instance.main_server.private_ip
 }
 
+output "instance_public_ipv4" {
+  value = aws_instance.main_server.public_ip
+}
+
 output "instance_public_dns" {
   value = aws_instance.main_server.public_dns
 }
