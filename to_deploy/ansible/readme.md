@@ -1,3 +1,3 @@
 ```
-ansible-playbook -i inventory setup.yaml -v
+ansible-playbook -i inventory setup.yaml -vvv
 ```
