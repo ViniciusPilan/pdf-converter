@@ -1,3 +1,8 @@
+resource "aws_iam_instance_profile" "main_server_instance_profile" {
+  name = "main_server_profile"
+  role = var.ec2_role_name
+}
+
 resource "aws_key_pair" "remote_access" {
   key_name   = "main-server-general-access-key"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCpOaPElHstphCdEOZ8p0JxH78kMVf8r0Z3Lqz32jRMLLEO4dAtQVLAr/NPJiNW40Ys0VV+n0LF1BjG3IId43kHr9DV1NkpnDuYemseEvCaLzLUhkyzTbMcCUGtGhAk+y7LnlcbMj1n6hh5nH99F1sjQMAVDBKNBw82jXsIhq1M3Ofh5lQtSnTssquR63q1TgGntrNfNVBT9r4tL9WE0FWCQcKuOWQnzzWST3cYd1KtUd0uti558qHoG1ibWv3YjMel7+geCSQEslESbXbx5aWohsgX4PnmB7OlKB9Et/+n6XPcTNsXuaxXg/KZ8xhpA3WQEPdFeTYOxK8rY9/lOKnT/ahxyHKufWkJUOY30K+Lx+MBbE4p5Ic0Ft9n9HA9T2W6oswNqilhaYfr7rYR2MfbuOjlbhxTiTlqrvJ7XwP/qHFo5iKb9RoHZuBiTNPzs/f8dPD3F2kGj1cI5z2kpJuVU8cb9jnzd/Ix94SG3VxMGiCW1xDbwII5Rccx8I/vCe0="
@@ -13,6 +18,7 @@ resource "aws_instance" "main_server" {
   instance_type = var.instance_type
   key_name = aws_key_pair.remote_access.key_name
   security_groups = [aws_security_group.main_security_group.name]
+  iam_instance_profile = aws_iam_instance_profile.main_server_instance_profile.name
 
   tags = {
     Name = "main-server"
